@@ -1,20 +1,20 @@
 package banco;
 
-
 public class Main {
+
     public static void main(String[] args) {
 
-        Cuenta cuenta1 = new Cuenta("Adrian", 1000);
-        Cuenta cuenta2 = new Cuenta("Vampiro", 500);
+        Cuenta cuenta = new Cuenta("Adrian", 1000);
+        CuentaService service = new CuentaService();
 
-        System.out.println("Saldo inicial cuenta1: " + cuenta1.getSaldo());
-        System.out.println("Saldo inicial cuenta2: " + cuenta2.getSaldo());
+        try{
+        service.depositar(cuenta, 500);
+        service.retirar(cuenta, 5);
+        }catch(RuntimeException e){
+            System.out.println("Error: " + e.getMessage());
+        }
 
-        cuenta1.transferir(cuenta2, 500);
-        System.out.println("Saldo final cuenta1: " + cuenta1.getSaldo());
-        System.out.println("Saldo final cuenta2: " + cuenta2.getSaldo());
-
-        
-
-    }    
+        System.out.println("Titular: " + cuenta.getTitular());
+        System.out.println("Saldo final: " + cuenta.getSaldo());
+    }
 }
